@@ -21,6 +21,11 @@ start
     return current.mainActive && !old.mainActive;
 }
 
+reset
+{
+    return current.framesPlayed < old.framesPlayed;
+}
+
 split
 {
     // Heart collected

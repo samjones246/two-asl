@@ -4,6 +4,7 @@ LiveSplit autosplitter for [2 by hubol](https://hubol.itch.io/2)
 ## Features
  - In-game-time/load removal
  - Auto start
+ - Auto reset
  - Split on heart collection
 
 ## TODO
