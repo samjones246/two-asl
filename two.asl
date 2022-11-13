@@ -59,16 +59,16 @@ startup
 
     settings.Add("split_chest", false, "Split on chest opened");
     settings.Add("split_chest_banner", false, "Banner", "split_chest");
-    settings.Add("split_chest_gun", false, "Gun", "split_chest");
+    settings.Add("split_chest_gun", false, "Stocking", "split_chest");
     settings.Add("split_chest_bombs", false, "Cherry Bombs", "split_chest");
-    settings.Add("split_chest_map_door", false, "Map upgrade (doors)", "split_chest");
-    settings.Add("split_chest_map_icons", false, "Map upgrade (icons)", "split_chest");
-    settings.Add("split_chest_boots", false, "Boots", "split_chest");
+    settings.Add("split_chest_map_door", false, "Jelly Map Upgrade", "split_chest");
+    settings.Add("split_chest_map_icons", false, "Bloody Map upgrade", "split_chest");
+    settings.Add("split_chest_boots", false, "Cool Boots", "split_chest");
     settings.Add("split_chest_stench", false, "Stench", "split_chest");
     settings.Add("split_chest_clover", false, "Clover", "split_chest");
-    settings.Add("split_chest_snorkle", false, "Snorkle", "split_chest");
-    settings.Add("split_chest_bombs_upgrade", false, "Bombs Upgrade", "split_chest");
-    settings.Add("split_chest_bulb", false, "Bulb", "split_chest");
+    settings.Add("split_chest_snorkle", false, "Snorkel", "split_chest");
+    settings.Add("split_chest_bombs_upgrade", false, "Bomb Upgrade", "split_chest");
+    settings.Add("split_chest_bulb", false, "Bombastic Bulb", "split_chest");
 }
 
 init
