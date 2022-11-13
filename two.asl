@@ -81,6 +81,36 @@ startup
     settings.Add("split_item_use_3", false, "Footprint", "split_item_use");
     settings.Add("split_item_use_4", false, "Femur", "split_item_use");
     settings.Add("split_item_use_5", false, "Claw", "split_item_use");
+
+    settings.Add("split_dream_enter", false, "Split on enter dream");
+    settings.Add("split_dream_enter_1", false, "Field", "split_dream_enter");
+    settings.Add("split_dream_enter_2", false, "Sunlight", "split_dream_enter");
+    settings.Add("split_dream_enter_3", false, "Shrine", "split_dream_enter");
+    settings.Add("split_dream_enter_4", false, "Final", "split_dream_enter");
+    settings.Add("split_dream_enter_5", false, "Brick", "split_dream_enter");
+    settings.Add("split_dream_enter_6", false, "Dot", "split_dream_enter");
+    settings.Add("split_dream_enter_7", false, "Plant", "split_dream_enter");
+    settings.Add("split_dream_enter_8", false, "Stone", "split_dream_enter");
+    settings.Add("split_dream_enter_9", false, "Rain", "split_dream_enter");
+    settings.Add("split_dream_enter_10", false, "Bath", "split_dream_enter");
+    settings.Add("split_dream_enter_11", false, "Kiss", "split_dream_enter");
+    settings.Add("split_dream_enter_12", false, "Cave", "split_dream_enter");
+    settings.Add("split_dream_enter_13", false, "Meadow", "split_dream_enter");
+
+    settings.Add("split_dream_exit", false, "Split on exit dream");
+    settings.Add("split_dream_exit_0", false, "Bedroom", "split_dream_exit");
+    settings.Add("split_dream_exit_1", false, "Field", "split_dream_exit");
+    settings.Add("split_dream_exit_2", false, "Sunlight", "split_dream_exit");
+    settings.Add("split_dream_exit_3", false, "Shrine", "split_dream_exit");
+    settings.Add("split_dream_exit_4", false, "Final", "split_dream_exit");
+    settings.Add("split_dream_exit_5", false, "Brick", "split_dream_exit");
+    settings.Add("split_dream_exit_6", false, "Dot", "split_dream_exit");
+    settings.Add("split_dream_exit_7", false, "Plant", "split_dream_exit");
+    settings.Add("split_dream_exit_8", false, "Stone", "split_dream_exit");
+    settings.Add("split_dream_exit_9", false, "Rain", "split_dream_exit");
+    settings.Add("split_dream_exit_10", false, "Bath", "split_dream_exit");
+    settings.Add("split_dream_exit_11", false, "Kiss", "split_dream_exit");
+    settings.Add("split_dream_exit_12", false, "Cave", "split_dream_exit");
 }
 
 start
@@ -196,6 +226,12 @@ split
                 return settings["split_item_use_"+i];
             }
         }
+    }
+
+    // -- Dream entry/exit --
+    if (current.currentDream != old.currentDream) {
+        return (current.currentDream >= 1 && settings["split_dream_enter_"+current.currentDream]) || 
+            (old.currentDream != -1 && old.currentDream != 13 && settings["split_dream_exit_"+old.currentDream]);
     }
 
     return false;
