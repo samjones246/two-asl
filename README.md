@@ -9,7 +9,7 @@ LiveSplit autosplitter for [2 by hubol](https://hubol.itch.io/2)
  - Split on boss defeat
  - Split on powerup collection
  - Split on boss enter
+ - Split on item collection
 
 ## TODO
  - Split on dream enter/end
- - Split on item collection

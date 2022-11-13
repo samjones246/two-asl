@@ -8,6 +8,7 @@ state("javaw")
     int playerMaxHealth: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0x218;
     int currentDream: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0x204;
     int eventPtr: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0xFC;
+    int eventItemPtr: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0x100;
     bool gotWallSlide: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0x346;
     bool gotGun: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0x347;
     bool gotBombs: "jvm.dll", 0x007C0EC0, 0x78, 0xD8, 0x1B0, 0x68, 0x348;
@@ -21,11 +22,6 @@ state("javaw")
 startup
 {
     vars.Log = (Action<object>)((output) => print("[2 ASL] " + output));
-
-    vars.getEvent = (Func<Process, int, int>)((g, index) => {
-        IntPtr addr = new IntPtr((vars.eventPtr + (index * 4) + 0x10) & 0xFFFFFFFF);
-        return g.ReadValue<int>(addr);
-    });
 
     settings.Add("split_hearts", false, "Split when any heart collected");
 
@@ -69,11 +65,22 @@ startup
     settings.Add("split_chest_snorkle", false, "Snorkel", "split_chest");
     settings.Add("split_chest_bombs_upgrade", false, "Bomb Upgrade", "split_chest");
     settings.Add("split_chest_bulb", false, "Bombastic Bulb", "split_chest");
-}
 
-init
-{
-    vars.eventPtr = null;
+    settings.Add("split_item_get", false, "Split on item acquired");
+    settings.Add("split_item_get_0", false, "Axe", "split_item_get");
+    settings.Add("split_item_get_1", false, "Truck Key", "split_item_get");
+    settings.Add("split_item_get_2", false, "Butterfly Bag", "split_item_get");
+    settings.Add("split_item_get_3", false, "Footprint", "split_item_get");
+    settings.Add("split_item_get_4", false, "Femur", "split_item_get");
+    settings.Add("split_item_get_5", false, "Claw", "split_item_get");
+
+    settings.Add("split_item_use", false, "Split on item used");
+    settings.Add("split_item_use_0", false, "Axe", "split_item_use");
+    settings.Add("split_item_use_1", false, "Truck Key", "split_item_use");
+    settings.Add("split_item_use_2", false, "Butterfly Bag", "split_item_use");
+    settings.Add("split_item_use_3", false, "Footprint", "split_item_use");
+    settings.Add("split_item_use_4", false, "Femur", "split_item_use");
+    settings.Add("split_item_use_5", false, "Claw", "split_item_use");
 }
 
 start
@@ -96,6 +103,15 @@ update
         eventInts[i] = BitConverter.ToInt32(eventBytes, i * 4);
     }
     current.eventArray = eventInts;
+
+    // Read eventItem array
+    IntPtr eventItemPtr = new IntPtr((current.eventItemPtr + 0x10) & 0xFFFFFFFF);
+    byte[] eventItemBytes = game.ReadBytes(eventItemPtr, 16 * 4);
+    int[] eventItemInts = new int[16];
+    for (int i=0;i<16;i++){
+        eventItemInts[i] = BitConverter.ToInt32(eventItemBytes, i * 4);
+    }
+    current.eventItemArray = eventItemInts;
 }
 
 split
@@ -167,6 +183,19 @@ split
     }
     if (current.eventArray[45] == 1 && old.eventArray[45] != 1) {
         return settings["split_chest_bulb"];
+    }
+
+    // -- Item Collection/Use --
+    for (int i = 0; i < 6; i++)
+    {
+        if (current.eventItemArray[i] != old.eventItemArray[i]) {
+            if (current.eventItemArray[i] == 1) {
+                return settings["split_item_get_"+i];
+            }
+            if (current.eventItemArray[i] == 2) {
+                return settings["split_item_use_"+i];
+            }
+        }
     }
 
     return false;
