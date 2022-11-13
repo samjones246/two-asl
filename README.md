@@ -7,9 +7,9 @@ LiveSplit autosplitter for [2 by hubol](https://hubol.itch.io/2)
  - Auto reset
  - Split on heart collection
  - Split on boss defeat
+ - Split on powerup collection
+ - Split on boss enter
 
 ## TODO
  - Split on dream enter/end
- - Split on powerup collection
  - Split on item collection
- - Split on boss enter
