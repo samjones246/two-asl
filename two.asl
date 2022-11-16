@@ -62,7 +62,7 @@ startup
     settings.Add("split_chest_boots", false, "Cool Boots", "split_chest");
     settings.Add("split_chest_stench", false, "Stench", "split_chest");
     settings.Add("split_chest_clover", false, "Clover", "split_chest");
-    settings.Add("split_chest_snorkle", false, "Snorkel", "split_chest");
+    settings.Add("split_chest_snorkel", false, "Snorkel", "split_chest");
     settings.Add("split_chest_bombs_upgrade", false, "Bomb Upgrade", "split_chest");
     settings.Add("split_chest_bulb", false, "Bombastic Bulb", "split_chest");
 
