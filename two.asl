@@ -115,16 +115,12 @@ startup
 
 start
 {
-    return current.currentDream == 0 &&
-           current.mainActive &&
-           !old.mainActive;
+    return current.mainActive && !old.mainActive;
 } 
 
 reset
 {
-    return current.currentDream == 0 &&
-           current.mainActive &&
-           !old.mainActive;
+    return current.framesPlayed < old.framesPlayed;
 }
 
 update
