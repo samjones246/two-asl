@@ -118,11 +118,6 @@ start
     return current.mainActive && !old.mainActive;
 } 
 
-reset
-{
-    return current.framesPlayed < old.framesPlayed;
-}
-
 update
 {
     // Read event array
